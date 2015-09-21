@@ -1,0 +1,27 @@
+
+.main{
+
+  margin-left:20%;
+  margin-top:5%;
+}
+canvas.pie{
+  margin: 5px;
+}
+
+#controles{
+  margin-top:5%;
+  margin-left:20%;
+}
+#controles button{
+ font-size: 8pt;
+}
+
+#main{
+margin-left:15%;
+}
+#time{
+font-size:125%;
+}
+.red{color:red}
+.big{font-size:100%}
+.underline{text-decoration:underline;}

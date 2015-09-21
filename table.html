@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Elections advance</title>
+    <link rel="stylesheet" href="./table/style.css" type="text/css" id="" media="print, projection, screen" />
+	<link rel="stylesheet" href="./css/style.css" type="text/css" id="" media="print, projection, screen" />
+	<script src="./scripts/jquery.min.js"></script>
+	<script src="./scripts/Chart.js"></script>
+	<script src="./scripts/drawing.js"></script>
+	<script src="./scripts/table_updater_q.js"></script>
+	<script src="./scripts/q.js"></script>
+	<script src="./scripts/setup.js"></script>
+  </head>
+  <body>
+  <div class="main">
+  <table id="elections" cellspacing="0" class="tablesorter">
+	<thead>
+		<tr>
+			
+			<th rowspan="3">Provincia</th>
+			
+			<th colspan="12" >Votos por Partido</th>
+			
+		</tr>
+		<tr>
+			<th colspan=2>PLN</th>
+			<th colspan=2>PAC</th>
+			<th colspan=2>PLIB</th>
+			<th colspan=2>RC</th>
+			<th rowspan=2>Total</th>
+			<th rowspan=2>%</th>
+			<th rowspan=2>Avance</th>
+		</tr>
+		<tr>
+			
+			<th>Total</th>
+			<th>%</th>
+			<th>Total</th>
+			<th>%</th>
+			<th>Total</th>
+			<th>%</th>
+			<th>Total</th>
+			<th>%</th>
+			
+			
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>San Jose</td>
+			<td>100</td>
+			<td>50</td>
+			<td>80</td>
+			<td>70</td>
+			<td>75</td>
+			<td>100</td>
+			<td>50</td>
+			<td>80</td>
+			<td>70</td>
+			<td>75%</td>
+			<td><progress value="50" max="100"></progress></td>
+		</tr>
+		<tr>
+			<td>Alajuela</td>
+			<td>100</td>
+			<td>50</td>
+			<td>80</td>
+			<td>70</td>
+			<td>75</td>
+			<td>100</td>
+			<td>50</td>
+			<td>80</td>
+			<td>70</td>
+			<td>75%</td>
+			<td><progress value="50" max="100"></progress></td>
+		</tr>
+		<tr>
+			<td>Heredia</td>
+			<td>100</td>
+			<td>50</td>
+			<td>80</td>
+			<td>70</td>
+			<td>75</td>
+			<td>100</td>
+			<td>50</td>
+			<td>80</td>
+			<td>70</td>
+			<td>75%</td>
+			<td><progress value="50" max="100"></progress></td>
+		</tr>
+		
+	</tbody>
+</table>
+  <div id="controles">
+    <button id="drawChartBtn">Dibujar Chart</button>
+	<button id="deleteBtn">Limpiar Tabla</button>
+	<button id="pollBtn">Consultar</button>
+  </div>
+	<canvas id="myChart" class="pie" width="100" height="100"></canvas>
+	
+    
+  </body>
+ </div>   
+</html>
