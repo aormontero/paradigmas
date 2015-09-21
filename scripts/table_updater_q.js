@@ -12,14 +12,38 @@ function bindPolling() {
 	$("#pollBtn").click(startPolling);
 };
 
+function getJson(url){
+var json="";
+
+	$.ajax({
+
+                
+                url:   url,
+				dataType:"json",
+				async: false,
+				cache: false,
+				error: function(request, status,error){
+					json= request.responseText+status+error;
+				
+				}
+
+        })
+        .done(function(data){
+
+	         json=data;
+	         
+        });
+
+        
+        return json;
+
+}
 
 function requestVotesFromServer(e){
 	//console.log('En serverRequest'+e);
 	  
-	 var req = $.ajax({url: 'http://localhost:8080/votes', 
-			   type:'GET',
-			   dataType:'text' 
-			 });
+	 var req = getJson('/votes');
+
 	 console.log('serverRequest after');
 	 console.log('request'+req);
 	 return Q(req); // CONVIERTE LA PROMESA DE JQUERY A Q
@@ -30,33 +54,57 @@ function requestVotesFromServer(e){
 
 
 function updateTable(votes){
+var mitabla= $("#elections");
+
+	
+	 var votes = $.map(votes.votes, function(index){return index});
+	 table_clear();
+        $.each(votes, function(index) { 
+ 
+        
+        var $linea = $('<tr></tr>');
+
+        $linea.append( $('<td></td>')
+            .html(votes[index].nombre )  
+            );
+        $linea.append( $('<td></td>')
+            .html(votes[index].parties.pln)  
+            );
+         $linea.append( $('<td></td>')
+            .html(0)  
+            );
+         $linea.append( $('<td></td>')
+            .html(votes[index].parties.pac)  
+            );
+         $linea.append( $('<td></td>')
+            .html(0)  
+            );
+          $linea.append( $('<td></td>')
+            .html(votes[index].parties.plib)  
+            );
+         $linea.append( $('<td></td>')
+            .html(0)  
+            );
+         $linea.append( $('<td></td>')
+            .html(0)  
+            );
+         $linea.append( $('<td></td>')
+            .html(0)  
+            );
+         $linea.append( $('<td></td>')
+            .html(votes[index].voters)  
+            );
+         $linea.append( $('<td></td>')
+            .html(0)  
+            );
 
 
-	var votes= votes;
-	console.log('Updating table');
-	table_clear();
-	var table = $("#elections");
-	var tbody = table.append($("<tbody/>"));
-	var td;
-	$.each(votes, function(province, data){
-		            var row = $("<tr/>");
-					td = $("<td/>");
-				    td.html(province);
-					row.append(td);
-					 $.each(data.parties, function(partyName, partyValue){
-						td = $("<td/>");
-						td.html(partyValue);
-						row.append(td);
-						td.fadeOut(1000).fadeIn(5000);
-						td = $("<td/>");
-						td.html(0);
-						row.append(td);
-						
-						
-					});
-					
-					tbody.append(row);				
-	});
+
+
+
+
+        mitabla.append($linea);
+ });
 	
 };
 var timer;

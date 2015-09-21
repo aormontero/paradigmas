@@ -135,13 +135,13 @@ function serveHello(req, res){
 };
 
 var the_votes = {
-	heredia:{voters: 70000, parties:{pln:0, pac:0, plib:0}},
-	sanjose:{voters: 200000, parties:{pln:0, pac:0, plib:0}},
-	alajuela:{voters: 80000, parties:{pln:0, pac:0, plib:0}},
-	cartago:{voters: 50000, parties:{pln:0, pac:0, plib:0}},
-	puntarenas:{voters:100000, parties:{pln:0, pac:0, plib:0}},
-	limon:{voters: 60000, parties:{pln:0, pac:0, plib:0}},
-	guanacaste: {voters:90000, parties:{pln:0, pac:0, plib:0}}
+	heredia:{nombre:"heredia",voters: 70000, parties:{pln:0, pac:0, plib:0}},
+	sanjose:{nombre: "sanjose", voters: 200000, parties:{pln:0, pac:0, plib:0}},
+	alajuela:{nombre:"alajuela",voters: 80000, parties:{pln:0, pac:0, plib:0}},
+	cartago:{nombre:"cartago", voters: 50000, parties:{pln:0, pac:0, plib:0}},
+	puntarenas:{nombre:"puntarenas", voters:100000, parties:{pln:0, pac:0, plib:0}},
+	limon:{nombre: "limon", voters: 60000, parties:{pln:0, pac:0, plib:0}},
+	guanacaste: {nombre:"guanacaste", voters:90000, parties:{pln:0, pac:0, plib:0}}
 	
 };
 
