@@ -11,7 +11,7 @@ var data = [
         color: "#46BFBD",
         highlight: "#5AD3D1",
         label: "Green"
-    },
+    },  
     {
         value: 100,
         color: "#FDB45C",

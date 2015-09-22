@@ -43,7 +43,7 @@ function requestVotesFromServer(e){
 	//console.log('En serverRequest'+e);
 	  
 	 var req = getJson('/votes');
-
+	 console.log(req);
 	 console.log('serverRequest after');
 	 console.log('request'+req);
 	 return Q(req); // CONVIERTE LA PROMESA DE JQUERY A Q
@@ -51,36 +51,53 @@ function requestVotesFromServer(e){
 	};
 
 
+function loadJSONData(url){
+		//alert("json");
+		    var http_request = new XMLHttpRequest();
+			http_request.open("GET", url, false);
+			http_request.send();
+			return JSON.parse(http_request.responseText);
+		}
+
+
+// var url= getJson('/votes');
+
+
+// var votes_json = loadJSONData(url); //carga json
+
+// var votes = votes_json.nombre;
+// console.log(votes);
 
 
 function updateTable(votes){
-var mitabla= $("#elections");
 
-	
-	 var votes = $.map(votes.votes, function(index){return index});
-	 table_clear();
-        $.each(votes, function(index) { 
+	var object= getJson('votes');
+	console.log(object);
+
+	var mitabla= $("#elections");
+	table_clear();
+        $.each(object.votes, function(index, obj) { 
  
         
         var $linea = $('<tr></tr>');
 
         $linea.append( $('<td></td>')
-            .html(votes[index].nombre )  
+            .html(obj.nombre )  
             );
         $linea.append( $('<td></td>')
-            .html(votes[index].parties.pln)  
+            .html(obj.parties.pln)  
             );
          $linea.append( $('<td></td>')
             .html(0)  
             );
          $linea.append( $('<td></td>')
-            .html(votes[index].parties.pac)  
+            .html(obj.parties.pac)  
             );
          $linea.append( $('<td></td>')
             .html(0)  
             );
           $linea.append( $('<td></td>')
-            .html(votes[index].parties.plib)  
+            .html(obj.parties.plib)  
             );
          $linea.append( $('<td></td>')
             .html(0)  
@@ -92,7 +109,7 @@ var mitabla= $("#elections");
             .html(0)  
             );
          $linea.append( $('<td></td>')
-            .html(votes[index].voters)  
+            .html(obj.voters)  
             );
          $linea.append( $('<td></td>')
             .html(0)  
