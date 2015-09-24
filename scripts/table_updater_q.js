@@ -1,3 +1,8 @@
+var modelo = {
+    totales:[],
+    status:0,
+    datos:[]
+};
 
 function table_clear(){
 	$("#elections tbody").remove();
@@ -43,91 +48,53 @@ function requestVotesFromServer(e){
 	//console.log('En serverRequest'+e);
 	  
 	 var req = getJson('/votes');
-	 console.log(req);
+
 	 console.log('serverRequest after');
 	 console.log('request'+req);
 	 return Q(req); // CONVIERTE LA PROMESA DE JQUERY A Q
 
 	};
+ function updateModel(votes){
+	
+	var d = Q.defer();
+	var votes = $.map(votes.votes, function(index){return index});
+	console.log('status'+modelo.status);
+	if(modelo.status==0){
+		$.each(votes, function(index) { 
+		modelo.totales.push(votes[index].voters);
+	});
+		modelo.status=1;
+		var x;
 
-
-function loadJSONData(url){
-		//alert("json");
-		    var http_request = new XMLHttpRequest();
-			http_request.open("GET", url, false);
-			http_request.send();
-			return JSON.parse(http_request.responseText);
-		}
-
-
-// var url= getJson('/votes');
-
-
-// var votes_json = loadJSONData(url); //carga json
-
-// var votes = votes_json.nombre;
-// console.log(votes);
-
-
-function updateTable(votes){
-
-	var object= getJson('votes');
-	console.log(object);
-
-	var mitabla= $("#elections");
-	table_clear();
-        $.each(object.votes, function(index, obj) { 
- 
-        
-        var $linea = $('<tr></tr>');
-
-        $linea.append( $('<td></td>')
-            .html(obj.nombre )  
-            );
-        $linea.append( $('<td></td>')
-            .html(obj.parties.pln)  
-            );
-         $linea.append( $('<td></td>')
-            .html(0)  
-            );
-         $linea.append( $('<td></td>')
-            .html(obj.parties.pac)  
-            );
-         $linea.append( $('<td></td>')
-            .html(0)  
-            );
-          $linea.append( $('<td></td>')
-            .html(obj.parties.plib)  
-            );
-         $linea.append( $('<td></td>')
-            .html(0)  
-            );
-         $linea.append( $('<td></td>')
-            .html(0)  
-            );
-         $linea.append( $('<td></td>')
-            .html(0)  
-            );
-         $linea.append( $('<td></td>')
-            .html(obj.voters)  
-            );
-         $linea.append( $('<td></td>')
-            .html(0)  
-            );
+	}
+	var x;
+	modelo.datos= votes;
+	d.resolve(modelo);
+	return d.promise;
 
 
 
 
+ }
 
 
-        mitabla.append($linea);
- });
+
+function updateTable(modelo){
+console.log('----------------------------------------------------------------------------------');
+console.log('totales');
+console.log(modelo.totales);
+
+console.log('datos');
+console.log(modelo.datos);
+
+
+console.log('----------------------------------------------------------------------------------');
 	
 };
 var timer;
 function startPolling(e){
 
- timer = setInterval(function(){votesWorkFlow();}, 5000);
+ timer = setInterval(function(){votesWorkFlow();}, 1000);
  	
 };
 
@@ -138,7 +105,7 @@ function votesWorkFlow(e){
 	  Q().then(disableControls)
 	     .then(requestVotesFromServer)
 	     .fail(handleServerError)
-	     .then(obtainNewVotesCalculations)
+	     .then(updateModel)
 		 .then(updateTable)
 		 .fail(handleTableError)
 		 //.then(updateCharts)
